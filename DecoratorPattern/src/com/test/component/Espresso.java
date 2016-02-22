@@ -2,16 +2,16 @@ package com.test.component;
 
 import com.test.component.Beverage;
 
-public class HouseBlend extends Beverage {
+public class Espresso extends Beverage {
 	
-	public HouseBlend() {
-		description = "Housde Blend Coffee";
+	public Espresso() {
+		description = "Espresso";
 	}
 	
 	@Override
 	public double cost() {
 		// TODO Auto-generated method stub
-		return .89;
+		return 1.99;
 	}
 
 }

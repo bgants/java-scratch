@@ -1,14 +1,11 @@
 package com.test.component;
 
 public abstract class Beverage {
-	String description;
-	double cost = .45;
+	protected String description = "Unkown Beverage";
 	
 	public String getDescription() {
 		return description;
 	}
 	
-	public double cost() {
-		return cost;
-	}
+	public abstract double cost();
 }
