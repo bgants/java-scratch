@@ -1,6 +1,6 @@
 package com.gants.utils;
 
-import java.io.StringWriter;
+mport java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,6 +12,19 @@ public class Snooper {
 
 	private ClassLoader cl = null;
 	private JAXBContext jaxbContext = null; 
+	private static Snooper instance = null;
+	
+	protected Snooper() {
+		//Can't touch it.
+	}
+	
+	public static Snooper getInstance() {
+		if(instance == null) {
+			instance = new Snooper();
+		}
+		return instance;
+	}
+	
 	
 	
 	/**
@@ -24,18 +37,19 @@ public class Snooper {
 	 * 
 	 * @param pkg - mil.navy.navair.cameo.v22.gsamedatamodel.flightdata
 	 * 
-	 * @param clazz - what your trying to marshall.
+	 * @param obj - what your trying to marshall.
+	 
 	 * @throws JAXBException 
-	 * 	 * 
+	 * 	 
 	 */
 	
-	public JSONObject marshallToJson(Class<?> ObjectFactoryClazz, String pkg, Class<?> clazz ) throws JAXBException  {
+	public JSONObject marshallToJson(Class<?> ObjectFactoryClazz, String pkg, Object obj ) throws JAXBException  {
 		
-		cl = ObjectFactoryClazz.getClass().getClassLoader();
+		cl = ObjectFactoryClazz.getClassLoader();
 		jaxbContext = JAXBContext.newInstance(pkg, cl);
 		Marshaller m = jaxbContext.createMarshaller();		
 		StringWriter sw = new StringWriter();
-		m.marshal(clazz, sw);			
+		m.marshal(obj, sw);			
 		JSONObject json = XML.toJSONObject(sw.toString());	
 		
 		return json;		
