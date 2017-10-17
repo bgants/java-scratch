@@ -1,8 +1,9 @@
 package com.gants.model;
 
 import java.util.Date;
-
 import org.springframework.data.annotation.Id;
+
+//Simple class representing our model.
 
 public class Person {
 	@Id	
