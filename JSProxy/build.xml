@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="JSProxy" default="war" basedir=".">
+ 	<property name="app.name" value="JSProxy"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="dist.dir" value="${build.dir}/dist"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="webinf.dir" value="${basedir}/web/WEB-INF"/>
+	<property name="web.dir" value="${basedir}/web"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+
+	<path id="lib.path">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+	<target name="prepare" depends="clean">
+		<tstamp/>
+    	<mkdir dir="${build.dir}"/>
+	</target>
+
+	<target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="prepare">
+        <mkdir dir="${classes.dir}"/>
+
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="${debug}">  
+        	<!-- 
+        		Note we have a lib dir here with the servlet-api.jar file in it just for compilation, its
+        		assumed that this will be deployed to tomcat and that tomcat instance of course would have a
+        		servlet jar.
+        	--> 
+        	<classpath refid="lib.path"/>        
+        </javac>
+     </target>
+
+    <target name="war" depends="compile">
+    	<mkdir dir="${dist.dir}"/>
+
+        <war destfile="${dist.dir}/${app.name}.war" webxml="${webinf.dir}/web.xml">
+            <classes dir="${classes.dir}"/>
+            <webinf dir="${webinf.dir}"/>
+            
+            <fileset dir="${web.dir}">
+                <include name="**/*.html"/>               
+            </fileset>
+        </war>
+    </target>       
+
+</project>
