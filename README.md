@@ -1,2 +1,4 @@
 # java-scratch
-Added an example showing Mongo and Spring Data, very simple.
+
+A series of small java examples, often useful for getting started on other projects and or reference.
+
