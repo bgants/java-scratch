@@ -1,4 +1,4 @@
-package com.solers.server;
+package com.gants.server;
 
 import java.io.IOException;
 import java.io.InputStream;
