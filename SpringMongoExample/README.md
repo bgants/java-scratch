@@ -4,5 +4,8 @@ This is an example of a Spring Boot implementation using MongoDB and REST.
 * This example assumes a MongDB instance installed and running.
 
 * This example works off of the MongoDB restaurants collection in the test database, follow this link to load the data: 
-- https://docs.mongodb.com/getting-started/shell/import-data/
+  -  https://docs.mongodb.com/getting-started/shell/import-data/
+
+* To run this issue this command:
+  - mvn spring-boot:run
 
