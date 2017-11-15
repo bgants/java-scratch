@@ -32,8 +32,11 @@ public class RestaurantController {
 		return r;
 	}
 	
-	@RequestMapping(value="/restaurants/name", method = RequestMethod.GET)
-	public List<Restaurant> grade(@RequestParam(value="name", defaultValue="Subway") String name) {
+	@RequestMapping(value="/restaurants/restaurantName", method = RequestMethod.GET)
+	public List<Restaurant> grade(@RequestParam("name") String name) {
+		if(name.equals("Wendy's")) {
+			name = "Wendy'S";
+		}
 		Query query = new Query();
 		query.addCriteria(Criteria.where("name").is(name));
 		List<Restaurant> r = mongTemplate.find(query, Restaurant.class);
@@ -42,5 +45,9 @@ public class RestaurantController {
 		
 	}
 	
+	@RequestMapping(value="/restaurants/count", method = RequestMethod.GET)
+	public long count() {
+		return repo.count();
+	}
 	
 }
